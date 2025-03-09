@@ -1,7 +1,7 @@
 streamlit==1.32.2
 colpali-engine==0.3.0
 chromadb==0.4.22
-torch==2.4.0
+torch>=2.0.0,<2.1.0
 transformers==4.44.2
 einops==0.8.0
 pypdfium2==4.30.0
