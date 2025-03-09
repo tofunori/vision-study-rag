@@ -17,7 +17,20 @@ A vision-based RAG (Retrieval-Augmented Generation) system for studying PDFs wit
 - Python 3.9+
 - [Ollama](https://ollama.ai/) (optional, for local LLM generation)
 
-### Setup
+### Setup for Windows
+
+1. Clone this repository
+   ```bash
+   git clone https://github.com/tofunori/vision-study-rag.git
+   cd vision-study-rag
+   ```
+
+2. Run the setup script (or follow the manual steps below)
+   ```bash
+   setup.bat
+   ```
+
+### Manual Setup
 
 1. Clone this repository
    ```bash
@@ -27,17 +40,29 @@ A vision-based RAG (Retrieval-Augmented Generation) system for studying PDFs wit
 
 2. Create a virtual environment and install dependencies
    ```bash
+   # On Windows
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   venv\Scripts\activate
+   
+   # On macOS/Linux
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+3. Install dependencies
+   ```bash
    pip install -r requirements.txt
    ```
 
-3. (Optional) If using Ollama, make sure it's installed and running
+4. (Optional) If using Ollama, make sure it's installed and running
+   - Download from [ollama.ai](https://ollama.ai)
+   - Pull the required model: `ollama pull llama3.2-vision`
 
 ## Usage
 
 1. Start the application
    ```bash
+   # Make sure your virtual environment is activated
    python app.py
    ```
 
@@ -62,6 +87,19 @@ OPENAI_API_KEY=  # Only if USE_OLLAMA=false
 CHROMA_DB_PATH=./chroma_db
 ```
 
+## Docker Setup
+
+If you prefer using Docker:
+
+1. Make sure Docker and Docker Compose are installed
+
+2. Run the application:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. Open your browser and go to `http://localhost:8501`
+
 ## How It Works
 
 1. **PDF Processing**: PDFs are converted to images page by page
@@ -69,6 +107,12 @@ CHROMA_DB_PATH=./chroma_db
 3. **Vector Storage**: Embeddings are stored in a local ChromaDB database
 4. **Query Processing**: Your questions are converted to embeddings and used to retrieve the most relevant PDF pages
 5. **Response Generation**: Retrieved pages are sent to Ollama or OpenAI for final answer generation
+
+## Troubleshooting
+
+- **Error loading the model**: Make sure you have enough RAM (at least 16GB recommended)
+- **Ollama connection issues**: Check that Ollama is running with `ollama serve`
+- **PyTorch errors**: Try adjusting the torch version in requirements.txt to match your system
 
 ## Contributing
 
